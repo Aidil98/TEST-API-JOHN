@@ -1,0 +1,22 @@
+{
+  "name": "pbkk-view",
+  "version": "1.0.0",
+  "description": "Ini adalah repo untuk melihat view dari API kelompok 1 PBKK H",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aidil98/TEST-API-JOHN.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Aidil98/TEST-API-JOHN/issues"
+  },
+  "homepage": "https://github.com/Aidil98/TEST-API-JOHN#readme",
+  "dependencies": {
+    "express": "^4.17.0"
+  }
+}
