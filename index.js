@@ -11,6 +11,10 @@ app.get('/', function(req, res) {
 app.get('/login', function(req, res) {
     res.render('pages/login');
 });
+app.get('/register', function(req, res) {
+    res.render('pages/register');
+});
+
 
 app.listen(4000);
 console.log('4000 is the magic port');
