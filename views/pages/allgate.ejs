@@ -1,25 +1,47 @@
-<title>Daftar Gate</title>
-<h1>Daftar Gate yang tersedia</h1>
-<style>
-table, th, td {
-	border: 1px solid black;
-	border-collapse: collapse;
-}
-</style>
-<% var i = 0 %>
-<table>
-<tr>
-<th>ID</th>
-<th>Jam Buka</th>
-<th>Jam Tutup</th>
-<th>Action</th>
-</tr>
-<% posts.forEach(function(posts){ %>
-<tr>
-<td><%= posts.id_gate %></td>
-<td><%= posts.jam_buka %></td>
-<td><%= posts.jam_tutup %></td>
-<td>hello</td>
-</tr>
-<% }) %>
-</table>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/head %>
+</head>
+<body class="container">
+
+<header>
+    <% include ../partials/header %>
+</header>
+
+<main>
+    <div class="jumbotron">
+        <title>Daftar Gate</title>
+        <h1>Daftar Gate yang tersedia</h1>
+		<style>
+			table, th, td {
+				border: 1px solid black;
+				border-collapse: collapse;
+			}
+		</style>
+		<% var i = 0 %>
+		<table>
+		<tr>
+			<th>ID</th>
+			<th>Jam Buka</th>
+			<th>Jam Tutup</th>
+			<th>Action</th>
+		</tr>
+		<% posts.forEach(function(posts){ %>
+		<tr>
+			<td><%= posts.id_gate %></td>
+			<td><%= posts.jam_buka %></td>
+			<td><%= posts.jam_tutup %></td>
+			<td>hello</td>
+		</tr>
+		<% }) %>
+		</table>
+    </div>
+</main>
+
+<footer>
+    <% include ../partials/footer %>
+</footer>
+
+</body>
+</html>
