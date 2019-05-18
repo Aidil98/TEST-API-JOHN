@@ -1,0 +1,23 @@
+<title>Daftar pengguna</title>
+<h1>Daftar pengguna</h1>
+<style>
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+</style>
+<% var i = 0 %>
+<table>
+<tr>
+<th>ID</th>
+<th>Username</th>
+<th>Action</th>
+</tr>
+<% posts.forEach(function(posts){ %>
+<tr>
+<td><%= posts.id_users %></td>
+<td><%= posts.nrp %> </td>
+<td>hello</td>
+</tr>
+<% }) %>
+</table>
