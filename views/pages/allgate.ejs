@@ -23,7 +23,7 @@ table, th, td {
 		<td><%= posts.id_gate %></td>
 		<td><%= posts.jam_buka %> </td>
 		<td><%= posts.jam_tutup %> </td>
-		<td>Delete</td>
+		<td><a href="/allgate/<%= posts.id_gate %>">Profil</a> &#8226 <a href="/allgate/<%= posts.id_gate %>/del">Delete</a></td>
 	</tr>
 	<% }) %>
 </tbody>

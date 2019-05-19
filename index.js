@@ -82,5 +82,19 @@ app.get('/allgate', function(req, res) {
 	    }
 	})
 });
+
+app.get('/allgate/:gateid/del', function(req, res) {
+	var url = "https://pbkk.azurewebsites.net/gates/"
+	var name = req.params.gateid
+	var comp = url.concat(name)
+	console.log(comp)
+	request.delete(comp, (error, response, body) => {
+		if (error) {
+			return console.dir(error);
+		}
+		console.log("Berhasil menghapus Gate");
+		res.redirect('/');
+	})
+});
 app.listen(4000);
 console.log('4000 is the magic port');
