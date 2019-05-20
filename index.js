@@ -1,6 +1,8 @@
 var express = require('express');
 var app = express();
 var request = require("request")
+const methodOverride = require('method-override');
+app.use(methodOverride('_method'));
 app.set('view engine', 'ejs');
 
 // index page 
@@ -40,6 +42,24 @@ app.get('/users', function(req, res) {
 	        res.render('pages/users', {posts: posts})
 	        //console.log(body) // Print the json response
 	    }
+	})
+});
+
+app.get('/users/:userid/del', function(req, res) {
+	var url = "https://pbkk.azurewebsites.net/users/"
+	var name = req.params.userid
+	var comp = url.concat(name)
+	var compl = comp.concat("/del")
+	console.log(compl)
+	request({
+		url: compl,
+		method: 'DELETE',
+		json: true
+	}, function(error, response, body) {
+		if (!error && response.statusCode === 200) {
+			console.log("Delete user berhasil")
+			res.redirect('/');
+		}
 	})
 });
 
