@@ -1,3 +1,4 @@
+
 var express = require('express');
 var app = express();
 var request = require("request")
@@ -61,8 +62,12 @@ app.get('/users/:userid/del', function(req, res) {
 			return console.dir(error);
 		}
 		console.log("Berhasil menghapus user");
-		res.redirect('/');
+		res.redirect('/berhasilhapus');
 	})
+});
+
+app.get('/berhasilhapus', function(req, res) {
+    res.render('berhasilhapus');
 });
 
 app.get('/users/:userid', function(req, res) {
@@ -116,11 +121,12 @@ app.get('/allgate/:gateid/del', function(req, res) {
 			return console.dir(error);
 		}
 		console.log("Berhasil menghapus Gate");
-		res.redirect('/');
+		res.redirect('/hapusgate');
 	})
 });
-app.listen(4000);
-console.log('4000 is the magic port');
+app.get('/hapusgate', function(req, res) {
+    res.render('hapusgate');
+});
 
 app.get('/allgate/:gateid', function(req, res) {
 	var url = "https://pbkk.azurewebsites.net/gates/"
@@ -139,3 +145,7 @@ app.get('/allgate/:gateid', function(req, res) {
 		}
 	})
 });
+
+
+app.listen(4000);
+console.log('4000 is the magic port');
