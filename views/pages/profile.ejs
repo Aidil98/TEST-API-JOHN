@@ -1,0 +1,28 @@
+<title>Daftar pengguna</title>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<h1>Daftar pengguna</h1>
+<style>
+table, th, td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+</style>
+<% var i = 0 %>
+<table class="table table-hover">
+<thead class="thead-light">
+<tr>
+<th scope="col">ID</th>
+<th scope="col">Username</th>
+<th scope="col">Action</th>
+</tr>
+</thead>
+<tbody>
+<% posts.forEach(function(posts){ %>
+<tr>
+<td><%= posts.id_users %></td>
+<td><%= posts.nrp %> </td>
+<td><a href="/users/<%= posts.id_users %>">Profil</a> &#8226 <a href="/users/<%= posts.id_users %>/del">Delete</a></td>
+</tr>
+<% }) %>
+</tbody>
+</table>

@@ -59,6 +59,23 @@ app.get('/users/:userid/del', function(req, res) {
 	})
 });
 
+app.get('/users/:userid', function(req, res) {
+	var url = "https://pbkk.azurewebsites.net/users/"
+	var name = req.params.userid
+	var comp = url.concat(name)
+	console.log(comp)
+	request.get({
+		url: comp,
+		json: true
+	},function(error, response, body) {
+		
+		if (!error && response.statusCode === 200) {
+			posts = body.user;
+	        console.log(posts);
+	        res.render('pages/profile', {posts: posts})
+		}
+	})
+});
 app.get('/allgate', function(req, res) {
 	var url = "https://pbkk.azurewebsites.net/gates"
 	var posts = []
