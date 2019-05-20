@@ -49,17 +49,13 @@ app.get('/users/:userid/del', function(req, res) {
 	var url = "https://pbkk.azurewebsites.net/users/"
 	var name = req.params.userid
 	var comp = url.concat(name)
-	var compl = comp.concat("/del")
-	console.log(compl)
-	request({
-		url: compl,
-		method: 'DELETE',
-		json: true
-	}, function(error, response, body) {
-		if (!error && response.statusCode === 200) {
-			console.log("Delete user berhasil")
-			res.redirect('/');
+	console.log(comp)
+	request.delete(comp, (error, response, body) => {
+		if (error) {
+			return console.dir(error);
 		}
+		console.log("Berhasil menghapus user");
+		res.redirect('/');
 	})
 });
 
