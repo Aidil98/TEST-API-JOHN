@@ -2,23 +2,29 @@ var express = require('express');
 var app = express();
 var request = require("request")
 const methodOverride = require('method-override');
+var session = require('express-session');
 app.use(methodOverride('_method'));
 app.set('view engine', 'ejs');
-
+app.use(session({
+	secret: 'hehe',
+	saveUninitialized: true,
+	resave: true
+}));
 // index page 
 app.get('/', function(req, res) {
-    res.render('pages/index');
+    res.render('index');
 });
 
 app.get('/login', function(req, res) {
-    res.render('pages/login');
+    res.render('login');
 });
+
 app.get('/register', function(req, res) {
-    res.render('pages/register');
+    res.render('register');
 });
 
 app.get('/gate', function(req, res) {
-    res.render('pages/gate');
+    res.render('gate');
 });
 
 app.get('/users', function(req, res) {
@@ -39,7 +45,7 @@ app.get('/users', function(req, res) {
 	        });*/
 	        posts = body.users;
 	        console.log(posts);
-	        res.render('pages/users', {posts: posts})
+	        res.render('users', {posts: posts})
 	        //console.log(body) // Print the json response
 	    }
 	})
@@ -72,7 +78,7 @@ app.get('/users/:userid', function(req, res) {
 		if (!error && response.statusCode === 200) {
 			posts = body.user;
 	        console.log(posts);
-	        res.render('pages/profile', {posts: posts})
+	        res.render('profile', {posts: posts})
 		}
 	})
 });
@@ -94,7 +100,7 @@ app.get('/allgate', function(req, res) {
 	        });*/
 	        posts = body.gates;
 	        console.log(posts);
-	        res.render('pages/allgate', {posts: posts})
+	        res.render('allgate', {posts: posts})
 	        //console.log(body) // Print the json response
 	    }
 	})
@@ -129,7 +135,7 @@ app.get('/allgate/:gateid', function(req, res) {
 		if (!error && response.statusCode === 200) {
 			posts = body.gate;
 	        console.log(posts);
-	        res.render('pages/profilegate', {posts: posts})
+	        res.render('profilegate', {posts: posts})
 		}
 	})
 });
