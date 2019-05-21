@@ -2,6 +2,7 @@
 var express = require('express');
 var app = express();
 var request = require("request")
+var bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 var session = require('express-session');
 app.use(methodOverride('_method'));
@@ -11,6 +12,10 @@ app.use(session({
 	saveUninitialized: true,
 	resave: true
 }));
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 // index page 
 app.get('/', function(req, res) {
     res.render('index');
@@ -51,6 +56,30 @@ app.get('/users', function(req, res) {
 	    }
 	})
 });
+
+
+app.post('/dologin', function(req, res) {
+	global.nrp = req.body.nrp;
+	global.password = req.body.pass;
+	global.gate = req.body.gate;
+	var link = "https://pbkk.azurewebsites.net/"
+	request.post({
+		url: link,
+		form: {username: global.nrp, pass: global.password, gate: global.gate},
+		function(error, response, body) {
+			result = JSON.parse(body);
+			console.dir(result["message"]);
+			if(result["message"] === "wrong user/pass") {
+				return res.redirect('/');
+			}
+			else {
+				req.session.nrp = req.body.nrp;
+				return res.redirect('/')
+			}
+		}
+	})
+}
+})
 
 app.get('/users/:userid/del', function(req, res) {
 	var url = "https://pbkk.azurewebsites.net/users/"
