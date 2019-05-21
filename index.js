@@ -1,4 +1,3 @@
-
 var express = require('express');
 var app = express();
 var request = require("request")
@@ -57,29 +56,68 @@ app.get('/users', function(req, res) {
 	})
 });
 
+app.get('/berhasillogin', function (req, res, next) {
+	res.render('berhasillogin');
+})
 
-app.post('/dologin', function(req, res) {
-	global.nrp = req.body.nrp;
-	global.password = req.body.pass;
-	global.gate = req.body.gate;
-	var link = "https://pbkk.azurewebsites.net/"
-	request.post({
-		url: link,
-		form: {username: global.nrp, pass: global.password, gate: global.gate},
-		function(error, response, body) {
-			result = JSON.parse(body);
-			console.dir(result["message"]);
-			if(result["message"] === "wrong user/pass") {
-				return res.redirect('/');
-			}
-			else {
-				req.session.nrp = req.body.nrp;
-				return res.redirect('/')
-			}
+app.post('/dologin', function(req, res, next){
+  	var url = "https://pbkk.azurewebsites.net/login"
+	console.log(url);  
+  	console.log("cabeeee");  
+	request({
+		url: url,
+		form: {username:req.body.nrp, pass:req.body.pass, gate:req.body.gate},
+		method: 'POST',
+		json: true
+	}, function(error, response, body) {
+		//result = JSON.parse(body);
+		//console.dir(result["message"]);
+		console.log(response.statusCode)
+		if (!error && response.statusCode === 200) {
+			console.log("login user berhasil")
+			res.redirect('/users');
+		}else{
+			res.redirect('/users')		}
+	})
+});
+
+app.post('/doregister', function(req, res, next){
+  	var url = "https://pbkk.azurewebsites.net/users"
+	console.log(url);  
+  	console.log("cabeeee");  
+	request({
+		url: url,
+		form: {nrp:req.body.nrp, password:req.body.password},
+		method: 'POST',
+		json: true
+	}, function(error, response, body) {
+		if (!error && response.statusCode === 200) {
+			console.log("pembuatan akun berhasil")
+			res.redirect('/users');
+		}else{
+			res.redirect("/users");
 		}
 	})
-}
-})
+});
+
+app.post('/docreategate', function(req, res, next){
+  	var url = "https://pbkk.azurewebsites.net/gates"
+	console.log(url);  
+  	console.log("cabeeee");  
+	request({
+		url: url,
+		form: {jam_buka:req.body.jam_buka, jam_tutup:req.body.jam_tutup},
+		method: 'POST',
+		json: true
+	}, function(error, response, body) {
+		if (!error && response.statusCode === 200) {
+			console.log("pembuatan gate berhasil")
+			res.redirect('/allgate');
+		}else{
+			res.redirect("/allgate");
+		}
+	})
+});
 
 app.get('/users/:userid/del', function(req, res) {
 	var url = "https://pbkk.azurewebsites.net/users/"
